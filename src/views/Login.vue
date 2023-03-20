@@ -36,13 +36,16 @@ export default {
         credentials: this.password
       })
       try {
-        const response = await fetch('http://pulsedev.prx:8666/kn/api/auth/login', {
-          method: 'POST',
-          body,
-          headers: {
-            'Content-Type': 'application/json'
+        const response = await fetch(
+          `${import.meta.env.VITE_ENDPOINT_URL || 'localhost:8080'}/api/auth/login`,
+          {
+            method: 'POST',
+            body,
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        })
+        )
         const data = await response.json()
         localStorage.setItem('userToken', data.token)
         localStorage.setItem('userName', data.username)

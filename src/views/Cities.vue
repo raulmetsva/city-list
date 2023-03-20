@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     async getCities() {
-      const url = `http://pulsedev.prx:8666/kn/api/cities?${
+      const url = `${import.meta.env.VITE_ENDPOINT_URL || 'localhost:8080'}/api/cities?${
         this.searchTerm ? 'query=' + this.searchTerm : ''
       }&size=${this.size}&page=${this.page - 1}`
       try {
@@ -116,7 +116,9 @@ export default {
       }
     },
     async editCity() {
-      const url = `http://pulsedev.prx:8666/kn/api/cities/${this.selectedCityReference}`
+      const url = `${import.meta.env.VITE_ENDPOINT_URL || 'localhost:8080'}/api/cities/${
+        this.selectedCityReference
+      }`
       const body = JSON.stringify({
         name: this.selectedCityName,
         img_url: this.selectedCityImageUrl
@@ -161,7 +163,7 @@ export default {
     },
     async logout() {
       try {
-        await fetch('http://pulsedev.prx:8666/kn/api/auth/logout', {
+        await fetch(`${import.meta.env.VITE_ENDPOINT_URL || 'localhost:8080'}/api/auth/logout`, {
           headers: {
             authorization: `Bearer ${this.userToken}`,
             'Content-Type': 'application/json'
