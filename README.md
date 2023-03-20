@@ -1,6 +1,15 @@
-# cities-list
+# Some notes about this cities-list app by the developer
 
-This template should help get you started developing with Vue 3 in Vite.
+## users
+
+admin/admin - will be able to edit the name and image of the cities
+user/password - will only be able to browse/search the list (but not edit)
+
+## other notes
+
+The session lasts for 60 minutes (as configured in the BE) so if some browsing/searching/editing is tried after that the user will be "logged out" in FE as well and directed to login page
+
+Search bar works so that a new request is not done before 1 second has passed since the last keystroke (to avoid a lot of unnecessary requests)
 
 ## Recommended IDE Setup
 
