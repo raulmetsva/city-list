@@ -3,6 +3,7 @@
 ## users
 
 admin/admin - will be able to edit the name and image of the cities
+
 user/password - will only be able to browse/search the list (but not edit)
 
 ## to run

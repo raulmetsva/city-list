@@ -36,7 +36,6 @@
         class="pagination"
         v-model="page"
         :length="totalPages"
-        :total-visible="totalVisible"
         rounded="circle"
       ></v-pagination>
     </div>
@@ -69,6 +68,7 @@ export default {
   data: () => ({
     cities: [],
     page: 1,
+    totalPages: 100,
     size: 10,
     searchTerm: null,
     searchTermTimeout: null,
@@ -83,14 +83,6 @@ export default {
   }),
   props: ['userToken', 'userName'],
   emit: ['resetUser'],
-  computed: {
-    totalPages() {
-      return Math.ceil(1000 / this.size)
-    },
-    totalVisible() {
-      return this.searchTerm ? 1 : undefined
-    }
-  },
   methods: {
     async getCities() {
       const url = `${import.meta.env.VITE_ENDPOINT_URL || 'localhost:8080'}/api/cities?${
@@ -110,6 +102,7 @@ export default {
         } else {
           const data = await response.json()
           this.cities = data.payload
+          this.totalPages = data.totalPages
         }
       } catch (error) {
         this.getCitiesError = true
